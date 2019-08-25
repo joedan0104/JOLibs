@@ -1,4 +1,5 @@
-apply plugin: 'maven'
+//apply plugin: 'maven'
+apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.android.library'
 
 android {
@@ -38,32 +39,62 @@ dependencies {
     compile rootProject.ext.dependencies["qrcode"]
 }
 
-uploadArchives {
-    repositories.mavenDeployer {
+publish {
+    // maven_lib_encode一些参数
+    def mavenConstant = rootProject.ext.maven_lib_joutil
+    // maven公共参数
+    def mavenPublic = rootProject.ext.jo_maven_public
 
-        def mavenConstant = rootProject.ext.maven_lib_dldownload;// maven_lib_encode一些参数
-        def mavenPublic = rootProject.ext.cdel_maven_public;// maven公共参数
-
-        pom.project {
-            version mavenConstant["version"]
-            artifactId mavenConstant["artifactId"]
-            groupId mavenPublic["groupId"]
-            packaging mavenPublic["type"]
-            description mavenConstant["description"]
-        }
-
-        def isSnapshot = pom.version.endsWith('-SNAPSHOT');// 是否为snapshot包
-        def userName = mavenPublic["userName"];
-        def passWord = mavenPublic["passWord"];
-
-        if (isSnapshot) {// snapshot
-            snapshotRepository(url: mavenPublic["snapShotUrl"]) {
-                authentication(userName: userName, password: passWord)
-            }
-        } else {// release
-            repository(url: mavenPublic["releaseUrl"]) {
-                authentication(userName: userName, password: passWord)
-            }
-        }
+    userOrg = 'novoda'
+    groupId = mavenPublic["groupId"]
+    artifactId = mavenConstant["artifactId"]
+    publishVersion = mavenConstant["version"]
+//    packaging mavenPublic["type"]
+    desc = mavenConstant["description"]
+    // 是否为snapshot包
+    def isSnapshot = publishVersion.endsWith('-SNAPSHOT')
+    if (isSnapshot) {
+        // snapshot
+        website = mavenPublic["snapShotUrl"]
+//        snapshotRepository(url: mavenPublic["snapShotUrl"]) {
+//            authentication(userName: userName, password: passWord)
+//        }
+    } else {
+        // release
+        website = mavenPublic["releaseUrl"]
+//        repository(url: mavenPublic["releaseUrl"]) {
+//            authentication(userName: userName, password: passWord)
+//        }
     }
+//    website = 'https://github.com/novoda/bintray-release'
 }
+
+//uploadArchives {
+//    repositories.mavenDeployer {
+//
+//        def mavenConstant = rootProject.ext.maven_lib_joutil;// maven_lib_encode一些参数
+//        def mavenPublic = rootProject.ext.jo_maven_public;// maven公共参数
+//
+//        pom.project {
+//            version mavenConstant["version"]
+//            artifactId mavenConstant["artifactId"]
+//            groupId mavenPublic["groupId"]
+//            packaging mavenPublic["type"]
+//            description mavenConstant["description"]
+//        }
+//
+//        def isSnapshot = pom.version.endsWith('-SNAPSHOT');// 是否为snapshot包
+//        def userName = mavenPublic["userName"];
+//        def passWord = mavenPublic["passWord"];
+//
+//        if (isSnapshot) {// snapshot
+//            snapshotRepository(url: mavenPublic["snapShotUrl"]) {
+//                authentication(userName: userName, password: passWord)
+//            }
+//        } else {// release
+//            repository(url: mavenPublic["releaseUrl"]) {
+//                authentication(userName: userName, password: passWord)
+//            }
+//        }
+//    }
+//}

@@ -20,16 +20,17 @@ ext {
     /**
      * maven库公共资源
      */
-    cdel_maven_public = [
-            "releaseUrl" : 'http://192.168.192.133:8081/nexus/content/repositories/cdel-releases/', //maven仓库地址
-            "snapShotUrl": 'http://192.168.192.133:8081/nexus/content/repositories/cdel-snapshots/',
-            "groupId"    : 'com.cdel.acc',// 对应maven的GroupId的值
+   jo_maven_public = [
+            "releaseUrl" : 'https://github.com/novoda/bintray-release/', //maven仓库地址
+            "snapShotUrl": 'https://dl.bintray.com/novoda-oss/snapshots/',
+            "groupId"    : 'com.kuku.util',// 对应maven的GroupId的值
             "userName"   : '871062195@qq.com',// 登录nexus ossde的用户名
             "passWord"   : 'YNjoe674121',// 登录nexus oss的密码
             "type"       : 'aar',// type
     ]
 
     maven_lib_joutil = [
+            "website" : "",
             "artifactId" : 'joutil',// 对应maven的artifactId的值
             "version"    : '1.0.0-SNAPSHOT',// 对应maven的VERSION的值 应为1.0.2-Beta1
             "description": 'joutil初始化版本'// description

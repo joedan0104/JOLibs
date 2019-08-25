@@ -9,6 +9,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
+        // 借用novoda工具(公共免费的仓库)
+        classpath 'com.novoda:bintray-release:0.8.1'
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.6.0'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
 
