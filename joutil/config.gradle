@@ -6,51 +6,80 @@ ext {
             bintray    : 'com.jfrog.bintray'
     ]
     isDebug = true
+
     android = [
-
-            /////////////////////////////////////////////////////////////////
-            ///   手动维护                                                 ///
-
-            versionCode      : 100,
-            versionName      : '1.0.0',
-            buildVersionCode : 1,
-            //数据库版本
-            databaseVersion  : 1,
-            ///                                                          ///
-            ////////////////////////////////////////////////////////////////
-
-            appName          : "oriental",
-            applicationId    : "net.hmzs.app",
-            appChannelName   : "main",
-            // 签名store
-            storeFile        : "release.keystore",
-            storePassword    : "huamei8888",
-            keyAlias         : "huamei",
-            keyPassword      : "huamei8888",
-            //混淆
-            proguardFile     : "proguard-rules.pro",
-
-            compileSdkVersion: 25,
-            buildToolsVersion: "25.0.3",
-
-            supportSdk       : '25.3.1',
-
-            minSdkVersion    : 14,
+            compileSdkVersion: 27,
+            buildToolsVersion: "27.0.3",
+            supportSdkVersion: "27.1.1",
+            minSdkVersion    : 15,
             targetSdkVersion : 22,
-
-            umengKey         : "5b8392b8f29d9828a7000017",
-            mapGDKey         : "aa8acac75de8189777338d070591080d",
-            jpushAppKey      : "1bf3151e8c0314600e0ad6f3",
+            versionCode      : 1,
+            versionName      : "1.0"
     ]
 
+    /**
+     * maven库公共资源
+     */
+    cdel_maven_public = [
+            "releaseUrl" : 'http://192.168.192.133:8081/nexus/content/repositories/cdel-releases/', //maven仓库地址
+            "snapShotUrl": 'http://192.168.192.133:8081/nexus/content/repositories/cdel-snapshots/',
+            "groupId"    : 'com.cdel.acc',// 对应maven的GroupId的值
+            "userName"   : '871062195@qq.com',// 登录nexus ossde的用户名
+            "passWord"   : 'YNjoe674121',// 登录nexus oss的密码
+            "type"       : 'aar',// type
+    ]
+
+    maven_lib_joutil = [
+            "artifactId" : 'joutil',// 对应maven的artifactId的值
+            "version"    : '1.0.0-SNAPSHOT',// 对应maven的VERSION的值 应为1.0.2-Beta1
+            "description": 'joutil初始化版本'// description
+    ]
+
+//    android = [
+//
+//            /////////////////////////////////////////////////////////////////
+//            ///   手动维护                                                 ///
+//
+//            versionCode      : 100,
+//            versionName      : '1.0.0',
+//            buildVersionCode : 1,
+//            //数据库版本
+//            databaseVersion  : 1,
+//            ///                                                          ///
+//            ////////////////////////////////////////////////////////////////
+//
+//            appName          : "oriental",
+//            applicationId    : "net.hmzs.app",
+//            appChannelName   : "main",
+//            // 签名store
+//            storeFile        : "release.keystore",
+//            storePassword    : "huamei8888",
+//            keyAlias         : "huamei",
+//            keyPassword      : "huamei8888",
+//            //混淆
+//            proguardFile     : "proguard-rules.pro",
+//
+//            compileSdkVersion: 25,
+//            buildToolsVersion: "25.0.3",
+//
+//            supportSdk       : '25.3.1',
+//
+//            minSdkVersion    : 14,
+//            targetSdkVersion : 22,
+//
+//            umengKey         : "5b8392b8f29d9828a7000017",
+//            mapGDKey         : "aa8acac75de8189777338d070591080d",
+//            jpushAppKey      : "1bf3151e8c0314600e0ad6f3",
+//    ]
+
     dependencies = [
-            "support-v4"                   : "com.android.support:support-v4:${android["supportSdk"]}",
-            "support-v7"                   : "com.android.support:support-v7:${android["supportSdk"]}",
-            "palette-v7"                   : "com.android.support:palette-v7:${android["supportSdk"]}",
-            "appcompat-v7"                 : "com.android.support:appcompat-v7:${android["supportSdk"]}",
-            "recyclerview-v7"              : "com.android.support:recyclerview-v7:${android["supportSdk"]}",
-            "design"                       : "com.android.support:design:${android["supportSdk"]}",
-            "annotations"                  : "com.android.support:support-annotations:${android["supportSdk"]}",
+            "support-v4"                   : "com.android.support:support-v4:${android["supportSdkVersion"]}",
+            "support-v7"                   : "com.android.support:support-v7:${android["supportSdkVersion"]}",
+            "palette-v7"                   : "com.android.support:palette-v7:${android["supportSdkVersion"]}",
+            "appcompat-v7"                 : "com.android.support:appcompat-v7:${android["supportSdkVersion"]}",
+            "recyclerview-v7"              : "com.android.support:recyclerview-v7:${android["supportSdkVersion"]}",
+            "design"                       : "com.android.support:design:${android["supportSdkVersion"]}",
+            "annotations"                  : "com.android.support:support-annotations:${android["supportSdkVersion"]}",
 
             // JSON 解析框架
             "gson"                         : "com.google.code.gson:gson:2.8.2",

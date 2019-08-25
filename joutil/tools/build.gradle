@@ -1,3 +1,4 @@
+apply plugin: 'maven'
 apply plugin: 'com.android.library'
 
 android {
@@ -21,6 +22,12 @@ android {
     }
 }
 
+// 依赖库快照版本同步更新
+configurations.all {
+    // Don't cache changing modules at all.
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile rootProject.ext.dependencies["appcompat-v7"]
@@ -29,4 +36,34 @@ dependencies {
     compile rootProject.ext.dependencies["gson"]
     // 二维码工具
     compile rootProject.ext.dependencies["qrcode"]
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+
+        def mavenConstant = rootProject.ext.maven_lib_dldownload;// maven_lib_encode一些参数
+        def mavenPublic = rootProject.ext.cdel_maven_public;// maven公共参数
+
+        pom.project {
+            version mavenConstant["version"]
+            artifactId mavenConstant["artifactId"]
+            groupId mavenPublic["groupId"]
+            packaging mavenPublic["type"]
+            description mavenConstant["description"]
+        }
+
+        def isSnapshot = pom.version.endsWith('-SNAPSHOT');// 是否为snapshot包
+        def userName = mavenPublic["userName"];
+        def passWord = mavenPublic["passWord"];
+
+        if (isSnapshot) {// snapshot
+            snapshotRepository(url: mavenPublic["snapShotUrl"]) {
+                authentication(userName: userName, password: passWord)
+            }
+        } else {// release
+            repository(url: mavenPublic["releaseUrl"]) {
+                authentication(userName: userName, password: passWord)
+            }
+        }
+    }
 }
